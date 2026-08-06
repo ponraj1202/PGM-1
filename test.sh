@@ -1,11 +1,3 @@
-
----
-
-# 4. Test File (`test.sh`)
-
-This file checks the student's SQL automatically.
-
-```bash
 #!/bin/bash
 
 echo "======================================"
@@ -15,14 +7,15 @@ echo "======================================"
 MYSQL_USER="root"
 MYSQL_PASSWORD="password"
 
+
 mysql -u $MYSQL_USER -p$MYSQL_PASSWORD < starter.sql
 
 
-# Test 1: Check Database
+# Test Case 1: Check Database
 
 DB_CHECK=$(mysql -u $MYSQL_USER -p$MYSQL_PASSWORD -N -e "SHOW DATABASES LIKE 'CollegeDB';")
 
-if [ "$DB_CHECK" == "CollegeDB" ]
+if [ "$DB_CHECK" = "CollegeDB" ]
 then
     echo "✓ Test Case 1 Passed : Database Created"
     MARK1=3
@@ -32,22 +25,22 @@ else
 fi
 
 
-# Test 2: Check Table
+# Test Case 2: Check Table
 
 TABLE_CHECK=$(mysql -u $MYSQL_USER -p$MYSQL_PASSWORD -N -e "USE CollegeDB; SHOW TABLES LIKE 'Department';")
 
 
-if [ "$TABLE_CHECK" == "Department" ]
+if [ "$TABLE_CHECK" = "Department" ]
 then
     echo "✓ Test Case 2 Passed : Department Table Created"
     MARK2=4
 else
-    echo "✗ Test Case 2 Failed : Table not created"
+    echo "✗ Test Case 2 Failed : Department Table not created"
     MARK2=0
 fi
 
 
-# Test 3: Check Primary Key
+# Test Case 3: Check Primary Key
 
 PK_CHECK=$(mysql -u $MYSQL_USER -p$MYSQL_PASSWORD -N -e "
 USE CollegeDB;
@@ -65,7 +58,7 @@ else
 fi
 
 
-# Test 4: Check Columns
+# Test Case 4: Check Columns
 
 COLUMN_CHECK=$(mysql -u $MYSQL_USER -p$MYSQL_PASSWORD -N -e "
 USE CollegeDB;
@@ -86,6 +79,7 @@ fi
 
 
 TOTAL=$((MARK1+MARK2+MARK3+MARK4))
+
 
 echo "======================================"
 echo "Marks : $TOTAL / 10"
